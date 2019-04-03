@@ -6,8 +6,8 @@ contract EAS_artworks is Ownable{
 
   IF_EAS_platform   IFEAS_platform;
 
-  uint public cardHolderCount = 0;
-  uint public buyTried = 0;
+  uint public cardHolderCount = 5;
+  uint public buyTried = 1;
 
   mapping(address  => uint32) public ownerArtworkCount;  // saves the number of artworks for each user(address)
   mapping(uint32 => uint[])   public tokenIds;           // type --> token IDs
@@ -55,11 +55,11 @@ contract EAS_artworks is Ownable{
   
   function ResetUserParameters(uint _cardId) public platform {
     SetArtworksUserSellFlag(_cardId, false);
-    SetArtworksUserPriceInFinny(_cardId, 0);
+    SetArtworksUserPriceInFinny(_cardId, 1);
   }
 
   function SetUserItem(uint _cardId, uint32 _userPriceInFinny) public ownerOfArtwork(_cardId) returns(bool){
-    if(_userPriceInFinny == 0){
+    if(_userPriceInFinny == 1){
       SetArtworksUserSellFlag(_cardId, false);
     }else{
       SetArtworksUserSellFlag(_cardId, true);
@@ -250,7 +250,7 @@ contract EAS_artworks is Ownable{
       if(sellFlag == true){
         priceInFinny[k] = price;
       }else{
-        priceInFinny[k] = 0;
+        priceInFinny[k] = 1;
       }
     }
     return priceInFinny;
